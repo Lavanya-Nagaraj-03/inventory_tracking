@@ -1,0 +1,56 @@
+{% extends 'adminpage.html' %}
+
+{% block style %}
+<style>
+    th,td{
+        margin: 10px;
+        padding: 10px   ;
+    }
+</style>
+{% endblock style%}
+
+{% block admin %}
+
+<div class="p-5 border border-rounded bg-light bg-opacity-25">
+    <form action="addproduct" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1 class="text-primary" style="text-align: center;font-family: 'Times New Roman', Times, serif;">Add Product</h1>
+        <hr>
+        <input type="text" placeholder="Product Id" name="pid" class="form-control border border-dark p-2"> <br>
+
+
+        <!-- <input type="text" placeholder="Product Type" name="ptype" class="form-control border border-dark p-2"> <br> -->
+        <select name="prtype">
+            <option value="Grocery">Grocery</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Laptops">Laptops</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Appliances">Appliances</option>
+            <option value="Beauty and toys">Beauty and toys</option>
+        </select>
+        <br><br>
+
+        <input type="text" placeholder="Product Name" name="pname" class="form-control border border-dark p-2"> <br>
+        <input type="text" placeholder="Unit" name="punit" class="form-control border border-dark p-2"> <br>
+        <!-- <input type="text" placeholder="Description" name="pds" class="form-control border border-dark p-2"> <br> -->
+        <textarea name="pds" id="tx" cols="30" rows="10" placeholder="Description ..." class="border border-dark"></textarea><br>
+        <label>Manufacture Date</label><br>
+        <input type="date" placeholder="Manufacture Date" name="pmfdate" class="form-control border border-dark p-2"> <br>
+        <label>Expiry Date</label><br>
+        <input type="date" placeholder="Expiry Date" name="pexpdate" class="form-control border border-dark p-2"> <br>
+
+        <input type="submit" value="Add Product" class="btn btn-outline-primary">
+    </form>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+    <script>
+        alert("{{message}}")
+    </script>
+{% endfor %}
+{% endif %}
+
+{% endblock admin %}
+

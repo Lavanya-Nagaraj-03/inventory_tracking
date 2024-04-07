@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+
+<h1 class="text-success" style="text-align: center;font-family: 'Times New Roman', Times, serif;">Report Inventory</h1>
+
+<table class="table table-hover">
+    <tr class="bg-info">
+        <th>Product Id</th>
+        <th>Product Name</th>
+        <th>Stock In Hand</th>
+    </tr>
+    {% for rs in res %}
+    <tr>
+        <td>{{rs.prod_id}}</td>
+        <td>{{rs.prod_name}}</td>
+        <td>{{rs.stock_hand}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<button onclick="downloadPDFWithBrowserPrint()" id="btn" class="btn btn-danger m-2">PDF</button>
+
+<script>
+    
+function downloadPDFWithBrowserPrint() {
+    document.getElementById('btn').style.visibility = 'hidden';
+  window.print();
+}
+document.querySelector('#browserPrint').addEventListener('click', downloadPDFWithBrowserPrint);
+</script>
+
+</body>
+</html>

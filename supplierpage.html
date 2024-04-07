@@ -1,0 +1,27 @@
+{% extends 'adminpage.html' %}
+
+{% block admin %}
+
+<div class="p-5 border border-rounded bg-light bg-opacity-25">
+    <form action="addsupplier" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1 class="text-primary" style="text-align: center;font-family: 'Times New Roman', Times, serif;">Supplier</h1>
+        <hr>
+        <input type="text" name="sid" placeholder="Supplier Id"  class="form-control border border-dark p-2"><br>
+        <input type="text" name="sname" placeholder="Supplier Name"  class="form-control border border-dark p-2"><br>
+        <input type="text" name="sgst" placeholder="GST No."  class="form-control border border-dark p-2"><br>
+        <input type="text" name="contact" placeholder="Contact Info"  class="form-control border border-dark p-2"><br>
+        <input type="text" name="email" placeholder="Email"  class="form-control border border-dark p-2"><br>
+        <textarea name="address" id="tx" cols="30" rows="10" placeholder="Address ..." class="border border-dark"></textarea><br>
+        <input type="submit" value="Add Supplier" class="btn btn-outline-primary">
+    </form>
+</div>
+{% if messages %}
+{% for message in messages %}
+    <script>
+        alert("{{message}}")
+    </script>
+{% endfor %}
+{% endif %}
+
+{% endblock admin %}

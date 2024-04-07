@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Tracking System</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+  {% block css %}
+
+  {% endblock css%}
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-md">
+      <h1><a class="text-light" href="#" style="text-decoration: none;font-family: 'Times New Roman', Times, serif;">INVENTORY TRACKING SYSTEM</a></h1>
+    </div>
+  </nav>
+
+  {% block a %}
+
+  {% endblock a %}
+
+  {% block script %}
+
+  {% endblock script %}
+</body>
+</html>

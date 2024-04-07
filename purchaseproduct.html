@@ -1,0 +1,87 @@
+{% extends 'adminpage.html' %}
+
+{% block style %}
+<style>
+    th,td{
+        margin: 10px;
+        padding: 10px   ;
+    }
+</style>
+{% endblock style%}
+
+{% block admin %}
+
+<div class="p-5 border border-rounded bg-light bg-opacity-25">
+    <form action="purchaseproduct" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1 class="text-primary" style="text-align: center;font-family: 'Times New Roman', Times, serif;">Purchase Product</h1>
+        <hr>
+        <input type="text" placeholder="Purchase Id" value="{{purchasenum}}" name="purchaseid" class="form-control border border-dark p-2"> <br>
+        <label>Date</label><br>
+        <input type="date" name="pdate" id="current_date" class="form-control border border-dark p-2"> <br>
+
+        <!-- ajax included -->
+        <input type="text" placeholder="Supplier Id" id="hsupplier_id" name="sid" class="form-control border border-dark p-2"> <br>
+        <input type="text" placeholder="Supplier Name" id="hsupplier_name" value="{{ data.djname }}" name="sname" class="form-control border border-dark p-2"> <br>
+        <!-- <input type="text" placeholder="Supplier GST No." id="hsupplier_gst" value="{{ data.djgst }}" name="sgstno" class="form-control border border-dark p-2"> <br> -->
+        <!-- ajax end -->
+
+        <input type="text" placeholder="Product Id" name="productid" class="form-control border border-dark p-2"> <br>
+        <input type="text" placeholder="Product Name" name="pname" class="form-control border border-dark p-2"> <br>
+        <input type="text" id="quantity" placeholder="Received Quantity" name="rqy" class="form-control border border-dark p-2" onkeyup="myfunction()"> <br>
+        <input type="text" id="rate" placeholder="Rate" name="rate"  class="form-control border border-dark p-2" onkeyup="myfunction()"><br>
+        <input type="text" id="ttl" placeholder="Total Amount" name="total" class="form-control border border-dark p-2"><br>
+        <!-- <h4>Total Price: <span id="totalPrice">0</span></h4> -->
+        <input type="submit" value="Purchase Product" class="btn btn-outline-primary">
+    </form>
+</div>
+
+<script>
+    function myfunction()
+    {
+    var qty = document.getElementById('quantity').value;
+    var price = document.getElementById('rate').value;
+    var ttll = parseInt(qty)  + parseInt(price);
+    if (!isNaN(ttll)) {
+                document.getElementById('ttl').value = ttll;
+            }
+    }
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script> 
+<script>
+$("#hsupplier_id").change(function()
+{
+  var sid = $(this).val();
+  $.ajax({
+    url: 'getsupplierid',
+    data:{'sid': sid},
+    contentType :'application/json',
+    
+    success: function (data) 
+    {
+      $("#hsupplier_name").val(data.djname);
+      $("#hsupplier_gst").val(data.djgst);
+      console.log(data.djname)
+      console.log(data.djgst)
+    },
+  });
+});
+
+</script>
+
+<script>
+  document.getElementById("current_date").valueAsDate = new Date();
+</script>
+
+{% if messages %}
+{% for message in messages %}
+    <script>
+        alert("{{message}}")
+    </script>
+{% endfor %}
+{% endif %}
+
+{% endblock admin %}
+
